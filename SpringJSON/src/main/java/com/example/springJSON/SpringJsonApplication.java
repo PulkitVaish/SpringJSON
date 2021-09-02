@@ -18,10 +18,10 @@ public class SpringJsonApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJsonApplication.class, args);
 	}
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+	 @Bean
+	   public RestTemplate getRestTemplate() {
+	      return new RestTemplate();
+	   }
 
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
