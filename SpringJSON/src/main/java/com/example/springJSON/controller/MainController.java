@@ -9,6 +9,11 @@ public class MainController {
 	@RequestMapping("/data")
 	@ResponseBody
 	public String Main() {
-		return "Testing...";
+		return "Works in Papa's lappy...";
+	}
+	@RequestMapping("/")
+	@ResponseBody
+	public String home() {
+		return "Home";
 	}
 }
