@@ -4,14 +4,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Arrays;
 import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,10 +18,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-
 @RestController
 public class MainController {
-	
 	@Autowired
 	   RestTemplate restTemplate;
 	
@@ -38,6 +33,8 @@ public class MainController {
 	   @RequestMapping(value = "/comments")
 	   public JSONArray getComments(HttpServletRequest req) {
 		   try {
+			  
+			 
 		      HttpHeaders headers = new HttpHeaders();
 		      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		      HttpEntity <String> entity = new HttpEntity<String>(headers);
@@ -50,17 +47,19 @@ public class MainController {
 		      Object userObject=JSONValue.parse(userString);  
 		      JSONObject userData = (JSONObject) userObject;
 		      JSONArray results = (JSONArray) userData.get("results");
+
+		      /** Getting data from baconipsum.com **/
+		      String commentString =  restTemplate.exchange("https://baconipsum.com/api/?type=meat-and-filler&paras="+total+"", HttpMethod.GET, entity, String.class).getBody();
+		      JSONArray commentData = (JSONArray) JSONValue.parse(commentString);
 		      
 		      JSONArray data = new JSONArray();
 		      
+		      
 		      for(int i=0;i<results.size();i++) {
-		    	  /** Getting data from asdfast **/
-		    	  int randomCommentLength = ThreadLocalRandom.current().nextInt(20, 40 + 1);
+//		    	  int randomCommentLength = ThreadLocalRandom.current().nextInt(80, 140 + 1);
 		    	  int randomLikeCount = ThreadLocalRandom.current().nextInt(0, 999 + 1);
-			      String commentString =  restTemplate.exchange("https://asdfast.beobit.net/api/?length="+ Integer.toString(randomCommentLength)+"&type=word", HttpMethod.GET, entity, String.class).getBody();
-			      Object commentObject=JSONValue.parse(commentString);  
-			      JSONObject commentData = (JSONObject) commentObject;
-			      String comment = commentData.get("text").toString();
+			      String comment = commentData.get(i).toString();
+//			      String comment = eachComment.substring(0,randomCommentLength);
 			      
 			      /** Transforming into the required format of data **/
 			      JSONObject response = new JSONObject();
@@ -88,6 +87,7 @@ public class MainController {
 			      response.put("likes",randomLikeCount);
 			      
 			      data.add(response);
+			     
 		      	}
 		      
 	      		return  data;
