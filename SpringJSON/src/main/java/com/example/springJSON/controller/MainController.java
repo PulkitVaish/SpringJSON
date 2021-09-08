@@ -33,8 +33,7 @@ public class MainController {
 	   @RequestMapping(value = "/comments")
 	   public JSONArray getComments(HttpServletRequest req) {
 		   try {
-			  
-			 
+			   
 		      HttpHeaders headers = new HttpHeaders();
 		      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		      HttpEntity <String> entity = new HttpEntity<String>(headers);
@@ -42,15 +41,30 @@ public class MainController {
 		      String total = req.getParameter("num");
 		      if(total==null) total = "1";//Param not set
 		      
+		      /*************************/
+		      String apiURL1 ="https://randomuser.me/api/?results="+total+"&inc=name,login,picture,registered&noinfo";
+		      String apiURL2 ="https://baconipsum.com/api/?type=meat-and-filler&paras="+total+"";
+		      
+		      ThreadDemo obj1 = new ThreadDemo(apiURL1);
+			   ThreadDemo obj2 = new ThreadDemo(apiURL2);
+			   Thread t1 = new Thread(obj1);
+			   Thread t2 = new Thread(obj2);
+			   t1.start();
+			   t2.start();
+			   t1.join();
+			   t2.join();
+//			   System.out.println(obj1.getDataObject());
+//			   System.out.println(obj2.getDataObject());
 		      /** Getting data from randomuserapi **/
-		      String userString =  restTemplate.exchange("https://randomuser.me/api/?results="+total+"&inc=name,login,picture,registered&noinfo", HttpMethod.GET, entity, String.class).getBody();
-		      Object userObject=JSONValue.parse(userString);  
-		      JSONObject userData = (JSONObject) userObject;
+//		      String userString =  restTemplate.exchange("https://randomuser.me/api/?results="+total+"&inc=name,login,picture,registered&noinfo", HttpMethod.GET, entity, String.class).getBody();
+//		      Object userObject=JSONValue.parse(userString);  
+		      JSONObject userData = (JSONObject) obj1.getDataObject();
 		      JSONArray results = (JSONArray) userData.get("results");
 
 		      /** Getting data from baconipsum.com **/
-		      String commentString =  restTemplate.exchange("https://baconipsum.com/api/?type=meat-and-filler&paras="+total+"", HttpMethod.GET, entity, String.class).getBody();
-		      JSONArray commentData = (JSONArray) JSONValue.parse(commentString);
+//		      String commentString =  restTemplate.exchange("https://baconipsum.com/api/?type=meat-and-filler&paras="+total+"", HttpMethod.GET, entity, String.class).getBody();
+//		      JSONObject commentObject = (JSONObject) obj2.getDataObject();
+		      JSONArray commentData = (JSONArray) obj2.getDataObject();
 		      
 		      JSONArray data = new JSONArray();
 		      
