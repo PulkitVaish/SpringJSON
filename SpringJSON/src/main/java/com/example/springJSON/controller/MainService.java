@@ -9,12 +9,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-class ThreadDemo implements Runnable {
+class MainService implements Runnable {
 
 	private String url;
 	private Object data;
 	
-	public ThreadDemo(String url) {
+	public MainService(String url) {
 		super();
 		this.url = url;
 	}
