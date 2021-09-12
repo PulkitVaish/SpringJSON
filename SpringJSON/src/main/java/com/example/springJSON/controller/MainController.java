@@ -4,8 +4,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Arrays;
 import java.util.Random;
-import javax.servlet.http.HttpServletRequest;
+import java.lang.management.ManagementFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpEntity;
@@ -29,6 +30,13 @@ public class MainController {
 	   @CrossOrigin
 	   @RequestMapping(value = "/comments")
 	   public JSONArray getComments(HttpServletRequest req) {
+//		   System.out.println(ManagementFactory.getThreadMXBean().getThreadCount());
+		   if(ManagementFactory.getThreadMXBean().getThreadCount()>30) {
+//			   System.out.println("Overload!!");
+			   JSONArray errorOverload = new JSONArray();
+			   errorOverload.add("Server overloaded with requests, Please try again later!");
+			   return errorOverload;
+		   }
 		   try {
 		      
 		      String total = req.getParameter("num");
@@ -75,6 +83,13 @@ public class MainController {
 	   @CrossOrigin
 	   @RequestMapping(value = "/reviews")
 	   public JSONArray getReviews(HttpServletRequest req) {
+//		   System.out.println(ManagementFactory.getThreadMXBean().getThreadCount());
+		   if(ManagementFactory.getThreadMXBean().getThreadCount()>30) {
+//			   System.out.println("Overload!!");
+			   JSONArray errorOverload = new JSONArray();
+			   errorOverload.add("Server overloaded with requests, Please try again later!");
+			   return errorOverload;
+		   }
 		   try {
 
 			      String total = req.getParameter("num");
@@ -97,7 +112,7 @@ public class MainController {
 			      JSONObject userData = (JSONObject) obj1.getDataObject();
 			      JSONArray results = (JSONArray) userData.get("results");
 			      
-			      /** Getting data from JSONPlaceholderapi **/ 
+			      /** Getting data from JSONPlaceholderAPI **/ 
 			      JSONArray reviews = (JSONArray) obj2.getDataObject();
 
 			      JSONArray responseData = new JSONArray();

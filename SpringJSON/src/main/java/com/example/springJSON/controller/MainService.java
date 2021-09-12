@@ -30,9 +30,10 @@ class MainService implements Runnable {
 		HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity <String> entity = new HttpEntity<String>(headers);
-		System.out.println("Thread :"+Thread.currentThread().getName()+" Started");
+//		System.out.println("Thread :"+Thread.currentThread().getName()+" Started");
 		String responseString =  restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
 		data=JSONValue.parse(responseString);  
+//		System.out.println("Exiting thread :"+Thread.currentThread());
 	}
 	
 }
