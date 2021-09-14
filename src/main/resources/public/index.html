@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>SpringJSON - Documentation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/assets/css/hightlightjs-dark.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+        <script type="text/javascript" src="/assets/js/renderjson.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500|Source+Code+Pro:300" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/style.css" media="all">
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+
+    <body class="one-content-column-version">
+        <div class="left-menu">
+            <div class="content-logo">
+                <img alt="SpringJSON" title="Spring Boot API" src="/assets/images/logo.png" height="32"/>
+                <span>SpringJSON</span>
+            </div>
+            <div class="content-menu">
+                <ul>
+                    <li class="scroll-to-link active" data-target="get-started">
+                        <a>GET STARTED</a>
+                    </li>
+                    <li class="scroll-to-link" data-target="get-comments">
+                        <a>GET COMMENTS</a>
+                    </li>
+                    <li class="scroll-to-link" data-target="get-reviews">
+                        <a>GET REVIEWS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="content-page">
+            <div class="content">
+                <div class="overflow-hidden content-section" id="content-get-started">
+                    <h1 id="get-started">Get started</h1>
+                    <p>
+                        The SpringJSON API provides programmatic access to random data like comments and reviews.
+                    </p>
+                    <p>It combines data from different popular APIs and packs them into desirable formats while providing competitive response time.</p>
+                </div>
+                <div class="overflow-hidden content-section" id="content-get-comments">
+                    <h2 id="get-comments">get comments</h2>
+                    <p>
+                        To get random comments you need to make a GET call to the following url :<br>
+                        <code class="higlighted">https://spring-json.herokuapp.com/comments</code>
+                    </p>
+                    <br>
+                    <h4>QUERY PARAMETERS</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>num</td>
+                                <td>Number</td>
+                                <td>A number in the range (1-100)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="comment-data-code">
+                        <pre><code class="code-container">fetch('https://spring-json.herokuapp.com/comments?num=10')
+.then(response => response.json())
+.then(json => console.log(json))</code></pre>
+                    </div>
+                    <div class="comment-data-button"><button class="btn" id="btn-comments">Run Script</button></div>
+                    <div class="comment-data-preview" id="comments-json">{ }</div>
+                </div>
+                <div class="overflow-hidden content-section" id="content-get-reviews" style="margin-bottom: 30px;">
+                    <h2 id="get-reviews">get reviews</h2>
+                    <p>
+                        To get random reviews you need to make a GET call to the following url :<br>
+                        <code class="higlighted">https://spring-json.herokuapp.com/reviews</code>
+                    </p>
+                    <br>
+                    <h4>QUERY PARAMETERS</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>num</td>
+                                <td>Number</td>
+                                <td>A number in the range (1-100)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="comment-data-code">
+                        <pre><code class="code-container">fetch('https://spring-json.herokuapp.com/reviews?num=10')
+.then(response => response.json())
+.then(json => console.log(json))</code></pre>
+                    </div>
+                    <div class="comment-data-button"><button class="btn" id="btn-reviews">Run Script</button></div>
+                    <div class="comment-data-preview" id="reviews-json">{ }</div>
+                </div>
+            </div>
+            
+        </div>
+        <script src="/assets/js/script.js"></script>
+    </body>
+
+</html>

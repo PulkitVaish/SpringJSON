@@ -1,18 +1,13 @@
 package com.example.springJSON.controller;
 
-import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.Arrays;
-import java.util.Random;
+
 import java.lang.management.ManagementFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +16,8 @@ import com.example.springJSON.model.Comment;
 import com.example.springJSON.model.Review;
 
 @RestController
-public class MainController {
-	
+public class MainController {		
+		
 	   /*
 	    * Endpoint to get random comments
 	   */
@@ -30,8 +25,8 @@ public class MainController {
 	   @CrossOrigin
 	   @RequestMapping(value = "/comments")
 	   public JSONArray getComments(HttpServletRequest req) {
-//		   System.out.println(ManagementFactory.getThreadMXBean().getThreadCount());
-		   if(ManagementFactory.getThreadMXBean().getThreadCount()>30) {
+		   System.out.println(ManagementFactory.getThreadMXBean().getThreadCount());
+		   if(ManagementFactory.getThreadMXBean().getThreadCount()>35) {
 //			   System.out.println("Overload!!");
 			   JSONArray errorOverload = new JSONArray();
 			   errorOverload.add("Server overloaded with requests, Please try again later!");
