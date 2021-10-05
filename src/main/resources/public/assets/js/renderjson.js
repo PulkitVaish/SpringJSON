@@ -203,7 +203,7 @@ var module, window, define, renderjson=(function() {
     renderjson.set_icons('☞ ', '☟ ');
     renderjson.set_show_by_default(false);
     renderjson.set_sort_objects(false);
-    renderjson.set_max_string_length(80);
+    renderjson.set_max_string_length(50);
     renderjson.set_replacer(void 0);
     renderjson.set_property_list(void 0);
     renderjson.set_collapse_msg(function(len) { return len + " item" + (len==1 ? "" : "s") })
