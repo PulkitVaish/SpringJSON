@@ -125,7 +125,7 @@ var module, window, define, renderjson=(function() {
         if (json === null) return themetext(null, my_indent, "keyword", "null");
         if (json === void 0) return themetext(null, my_indent, "keyword", "undefined");
 
-        if (typeof(json) == "string" && json.length > options.max_string_length)
+        if (typeof(json) == "string")
             return append(span("string"), themetext(null, my_indent, "string", JSON.stringify(json.substr(0,options.max_string_length)+" ...")));
 
         if (typeof(json) != "object" || [Number, String, Boolean, Date].indexOf(json.constructor) >= 0) // Strings, numbers and bools
